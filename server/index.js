@@ -9,12 +9,13 @@ app.use(cors())
 const server = http.createServer(app)
 const io = new Server(server, {
   cors: {
-    origin: 'https://localhost:3000',
+    origin: 'http://localhost:3000',
+    methods: ['GET', 'POST'],
   },
 })
 
 io.on('connection', (socket) => {
-  console.log(socket.id)
+  console.log('user connected', socket.id)
 
   socket.on('disconnect', () => {
     console.log('user disconnected', socket.id)
@@ -22,5 +23,5 @@ io.on('connection', (socket) => {
 })
 
 server.listen(3001, () => {
-  console.log('Server Runnig')
+  console.log('Server Running')
 })
