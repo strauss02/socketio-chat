@@ -14,12 +14,12 @@ import { selectChat, changeMessageInput } from './features/chat/chatSlice'
 
 const ariaLabel = { 'aria-label': 'description' }
 
-export default function ChatFooter() {
+export default function ChatFooter(props) {
   const [value, setValue] = React.useState(0)
 
   const chatState = useSelector(selectChat)
   const dispatch = useDispatch()
-  const socket = chatState.socket
+  const { socket } = props
 
   const handleInputChange = (e) => {
     dispatch(changeMessageInput(e.target.value))
@@ -33,7 +33,7 @@ export default function ChatFooter() {
         message: chatState.inputMessage,
         time: `${new Date(Date.now()).getHours()} : ${new Date(
           Date.now()
-        ).getMinutes()}  `,
+        ).getMinutes()}`,
       }
       await socket.emit('send_message', messageData)
     }
@@ -46,7 +46,9 @@ export default function ChatFooter() {
         inputProps={ariaLabel}
         onChange={handleInputChange}
       />
-      <Button variant="contained">Send Message </Button>
+      <Button onClick={sendMessage} variant="contained">
+        Send Message{' '}
+      </Button>
 
       <BottomNavigation
         showLabels

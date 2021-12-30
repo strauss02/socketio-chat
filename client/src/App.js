@@ -6,7 +6,6 @@ import chatSlice, {
   selectChat,
   changeCurrentUsername,
   changeCurrentRoom,
-  defineSocket,
 } from './features/chat/chatSlice'
 
 import './App.css'
@@ -19,28 +18,37 @@ function App() {
 
   const [username, setUsername] = useState('')
   const [room, setRoom] = useState('')
+  const [showChat, setShowChat] = useState(false)
 
   const joinRoom = () => {
     if (username !== '' && room !== '') {
       socket.emit('join_room', room)
       dispatch(changeCurrentRoom(room))
       dispatch(changeCurrentUsername(username))
-      dispatch(defineSocket(socket))
+      console.log(socket)
+      setShowChat(true)
     }
   }
 
   return (
     <div className="App">
-      <h3>Join Chat</h3>
-      <input
-        onChange={(e) => setUsername(e.target.value)}
-        type="text"
-        placeholder="john..."
-      />
-      <input onChange={(e) => setRoom(e.target.value)} placeholder="room id" />
-      <button onClick={joinRoom}>Join a room</button>
-
-      <Chat socket={socket} username={username} room={room} />
+      {showChat ? (
+        <Chat socket={socket} username={username} room={room} />
+      ) : (
+        <>
+          <h3>Join Chat</h3>
+          <input
+            onChange={(e) => setUsername(e.target.value)}
+            type="text"
+            placeholder="john..."
+          />
+          <input
+            onChange={(e) => setRoom(e.target.value)}
+            placeholder="room id"
+          />
+          <button onClick={joinRoom}>Join a room</button>
+        </>
+      )}
     </div>
   )
 }

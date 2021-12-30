@@ -4,7 +4,7 @@ const initialState = {
   inputMessage: '',
   currentRoom: '',
   currentUsername: '',
-  socket: {},
+  chatLog: [],
 }
 
 export const chatSlice = createSlice({
@@ -20,18 +20,11 @@ export const chatSlice = createSlice({
     changeCurrentUsername: (state, action) => {
       state.currentUsername = action.payload
     },
-    defineSocket: (state, action) => {
-      state.socket = action.payload
-    },
   },
 })
 
-export const {
-  defineSocket,
-  changeCurrentUsername,
-  changeCurrentRoom,
-  changeMessageInput,
-} = chatSlice.actions
+export const { changeCurrentUsername, changeCurrentRoom, changeMessageInput } =
+  chatSlice.actions
 
 export const selectChat = (state) => state.chat
 
