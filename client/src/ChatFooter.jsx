@@ -29,7 +29,7 @@ export default function ChatFooter(props) {
     dispatch(changeMessageInput(e.target.value))
   }
 
-  const sendMessage = async () => {
+  const sendMessage = async (e) => {
     if (chatState.inputMessage !== '') {
       const messageData = {
         room: chatState.currentRoom,
@@ -41,6 +41,7 @@ export default function ChatFooter(props) {
       }
       await socket.emit('send_message', messageData)
       dispatch(addMessageToChatLog(messageData))
+      dispatch(changeMessageInput(''))
     }
   }
 
@@ -53,6 +54,7 @@ export default function ChatFooter(props) {
         onKeyPress={(e) => {
           e.key === 'Enter' && sendMessage()
         }}
+        value={chatState.inputMessage}
       />
       <Button onClick={sendMessage} variant="contained">
         Send Message{' '}
