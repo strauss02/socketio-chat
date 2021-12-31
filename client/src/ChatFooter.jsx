@@ -10,7 +10,11 @@ import Button from '@mui/material/Button'
 
 import { useSelector, useDispatch } from 'react-redux'
 
-import { selectChat, changeMessageInput } from './features/chat/chatSlice'
+import {
+  selectChat,
+  changeMessageInput,
+  addMessageToChatLog,
+} from './features/chat/chatSlice'
 
 const ariaLabel = { 'aria-label': 'description' }
 
@@ -36,6 +40,7 @@ export default function ChatFooter(props) {
         ).getMinutes()}`,
       }
       await socket.emit('send_message', messageData)
+      dispatch(addMessageToChatLog(messageData))
     }
   }
 
@@ -45,6 +50,9 @@ export default function ChatFooter(props) {
         defaultValue="Hello world"
         inputProps={ariaLabel}
         onChange={handleInputChange}
+        onKeyPress={(e) => {
+          e.key === 'Enter' && sendMessage()
+        }}
       />
       <Button onClick={sendMessage} variant="contained">
         Send Message{' '}

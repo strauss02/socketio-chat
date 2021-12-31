@@ -20,11 +20,18 @@ export const chatSlice = createSlice({
     changeCurrentUsername: (state, action) => {
       state.currentUsername = action.payload
     },
+    addMessageToChatLog: (state, action) => {
+      state.chatLog.push(action.payload)
+    },
   },
 })
 
-export const { changeCurrentUsername, changeCurrentRoom, changeMessageInput } =
-  chatSlice.actions
+export const {
+  changeCurrentUsername,
+  addMessageToChatLog,
+  changeCurrentRoom,
+  changeMessageInput,
+} = chatSlice.actions
 
 export const selectChat = (state) => state.chat
 
