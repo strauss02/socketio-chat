@@ -17,6 +17,13 @@ function Chat({ socket, username, room }) {
     })
   }, [socket])
 
+  const chatBodyStyling = {
+    overflowY: 'scroll',
+    overflowX: 'hidden',
+    width: '100%',
+    height: 1000,
+  }
+
   return (
     <div>
       <Header />

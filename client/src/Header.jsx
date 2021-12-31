@@ -9,7 +9,16 @@ import MenuIcon from '@mui/icons-material/Menu'
 
 export default function Header() {
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box
+      sx={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        right: 0,
+        width: 1,
+        zIndex: 1,
+      }}
+    >
       <AppBar position="static">
         <Toolbar>
           <IconButton

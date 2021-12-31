@@ -46,9 +46,9 @@ export default function ChatFooter(props) {
   }
 
   return (
-    <Box sx={{ width: 500 }}>
+    <Box sx={{ position: 'fixed', bottom: 0, left: 0, right: 0, width: 1 }}>
       <Input
-        defaultValue="Hello world"
+        placeholder="Write your message here..."
         inputProps={ariaLabel}
         onChange={handleInputChange}
         onKeyPress={(e) => {

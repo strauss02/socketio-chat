@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux'
 import ChatBubble from './ChatBubble'
 import { selectChat } from './features/chat/chatSlice'
 import ScrollToBottom from 'react-scroll-to-bottom'
+import { Grid } from '@mui/material'
 
 const chatBodyStyling = {
   overflowY: 'scroll',
@@ -15,13 +16,17 @@ function ChatBody() {
   const chatState = useSelector(selectChat)
 
   return (
-    <div style={chatBodyStyling}>
-      <ScrollToBottom>
+    <ScrollToBottom>
+      <Grid sx={{ mt: 10, mb: 12 }} container>
         {chatState.chatLog.map((messageObj) => {
-          return <ChatBubble messageObj={messageObj} />
+          return (
+            <Grid item xs={12}>
+              <ChatBubble messageObj={messageObj} />
+            </Grid>
+          )
         })}
-      </ScrollToBottom>
-    </div>
+      </Grid>
+    </ScrollToBottom>
   )
 }
 
