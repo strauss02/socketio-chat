@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import io from 'socket.io-client'
 import { Grid } from '@mui/material'
+import Header from './Header'
+import ChatFooter from './ChatFooter'
 
 import { useSelector, useDispatch } from 'react-redux'
 import chatSlice, {
@@ -11,6 +13,7 @@ import chatSlice, {
 
 import './App.css'
 import Chat from './Chat'
+import LoginForm from './LoginForm'
 const socket = io.connect('http://localhost:3001')
 
 function App() {
@@ -39,32 +42,35 @@ function App() {
   }
 
   return (
-    <Grid container>
-      <Grid sm={2} item></Grid>
-
-      <Grid sm={8} item>
-        <div className="App">
-          {showChat ? (
-            <Chat socket={socket} username={username} room={room} />
-          ) : (
-            <>
-              <h3>Join Chat</h3>
-              <input
-                onChange={(e) => setUsername(e.target.value)}
-                type="text"
-                placeholder="john..."
+    <>
+      <Header />
+      <ChatFooter />
+      <Grid container>
+        <Grid sm={2} item></Grid>
+        <Grid sm={8} item>
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              height: '100vh',
+              justifyContent: 'center',
+            }}
+            className="App"
+          >
+            {showChat ? (
+              <Chat socket={socket} username={username} room={room} />
+            ) : (
+              <LoginForm
+                setUsername={setUsername}
+                setRoom={setRoom}
+                joinRoom={joinRoom}
               />
-              <input
-                onChange={(e) => setRoom(e.target.value)}
-                placeholder="room id"
-              />
-              <button onClick={joinRoom}>Join a room</button>
-            </>
-          )}
-        </div>
+            )}
+          </div>
+        </Grid>
+        <Grid sm={2} item></Grid>
       </Grid>
-      <Grid sm={2} item></Grid>
-    </Grid>
+    </>
   )
 }
 

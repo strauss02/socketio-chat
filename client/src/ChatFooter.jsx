@@ -7,7 +7,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite'
 import LocationOnIcon from '@mui/icons-material/LocationOn'
 import Input from '@mui/material/Input'
 import Button from '@mui/material/Button'
-
+import SendIcon from '@mui/icons-material/Send'
 import { useSelector, useDispatch } from 'react-redux'
 
 import {
@@ -15,8 +15,7 @@ import {
   changeMessageInput,
   addMessageToChatLog,
 } from './features/chat/chatSlice'
-
-const ariaLabel = { 'aria-label': 'description' }
+import { AppBar, Grid, IconButton, Toolbar } from '@mui/material'
 
 export default function ChatFooter(props) {
   const [value, setValue] = React.useState(0)
@@ -46,31 +45,36 @@ export default function ChatFooter(props) {
   }
 
   return (
-    <Box sx={{ position: 'fixed', bottom: 0, left: 0, right: 0, width: 1 }}>
-      <Input
-        placeholder="Write your message here..."
-        inputProps={ariaLabel}
-        onChange={handleInputChange}
-        onKeyPress={(e) => {
-          e.key === 'Enter' && sendMessage()
-        }}
-        value={chatState.inputMessage}
-      />
-      <Button onClick={sendMessage} variant="contained">
-        Send Message{' '}
-      </Button>
-
-      <BottomNavigation
-        showLabels
-        value={value}
-        onChange={(event, newValue) => {
-          setValue(newValue)
-        }}
-      >
-        <BottomNavigationAction label="Recents" icon={<RestoreIcon />} />
-        <BottomNavigationAction label="Favorites" icon={<FavoriteIcon />} />
-        <BottomNavigationAction label="Nearby" icon={<LocationOnIcon />} />
-      </BottomNavigation>
-    </Box>
+    <AppBar position="fixed" sx={{ top: 'auto', bottom: 0 }}>
+      <Toolbar>
+        <Grid container>
+          <Grid item xs={11}>
+            <Input
+              sx={{
+                width: 1,
+                backgroundColor: 'white',
+                borderRadius: '4em',
+                pl: 2,
+                '&::before': {
+                  border: 'none',
+                },
+              }}
+              disabled={chatState.currentRoom ? false : true}
+              placeholder="Write your message here..."
+              onChange={handleInputChange}
+              onKeyPress={(e) => {
+                e.key === 'Enter' && sendMessage()
+              }}
+              value={chatState.inputMessage}
+            />
+          </Grid>
+          <Grid item xs={1}>
+            <IconButton onClick={sendMessage} variant="contained">
+              <SendIcon />
+            </IconButton>
+          </Grid>
+        </Grid>
+      </Toolbar>
+    </AppBar>
   )
 }

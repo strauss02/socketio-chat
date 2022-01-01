@@ -9,11 +9,17 @@ function ChatBubble({ messageObj }) {
   const chatState = useSelector(selectChat)
 
   const selfSentMessageStyling = {
-    backgroundColor: 'green',
+    backgroundColor: '#669f7e',
     height: 'auto',
+    borderRadius: '0px 5px 5px 5px',
+    '&::before': {
+      content: 'a',
+      color: 'blue',
+      backgroundColor: 'blue',
+    },
   }
   const fellowSentMessageStyling = {
-    backgroundColor: 'blue',
+    backgroundColor: '#12babe',
     height: 'auto',
   }
 
