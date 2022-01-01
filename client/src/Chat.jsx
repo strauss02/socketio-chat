@@ -1,17 +1,14 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import Header from './Header'
 import ChatFooter from './ChatFooter'
 import ChatBody from './ChatBody'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import {
   addMessageToChatLog,
   changeRoomPopulation,
-  selectChat,
 } from './features/chat/chatSlice'
 
 function Chat({ socket, username, room }) {
-  const [currentMessage, setCurrentMessage] = useState('')
-  const chatState = useSelector(selectChat)
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -23,6 +20,7 @@ function Chat({ socket, username, room }) {
       console.log('from client', data)
       dispatch(changeRoomPopulation(data))
     })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [socket])
 
   return (

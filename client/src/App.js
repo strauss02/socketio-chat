@@ -5,9 +5,8 @@ import Header from './Header'
 import ChatFooter from './ChatFooter'
 import { GlobalStyles } from '@mui/material'
 
-import { useSelector, useDispatch } from 'react-redux'
-import chatSlice, {
-  selectChat,
+import { useDispatch } from 'react-redux'
+import {
   changeCurrentUsername,
   changeCurrentRoom,
 } from './features/chat/chatSlice'
@@ -15,11 +14,11 @@ import chatSlice, {
 import './App.css'
 import Chat from './Chat'
 import LoginForm from './LoginForm'
+
 const socket = io.connect('http://localhost:3001')
 
 function App() {
   const dispatch = useDispatch()
-  const chatState = useSelector(selectChat)
 
   const [username, setUsername] = useState('')
   const [room, setRoom] = useState('')
@@ -33,13 +32,6 @@ function App() {
       console.log(socket)
       setShowChat(true)
     }
-  }
-
-  const chatBodyStyling = {
-    overflowY: 'scroll',
-    overflowX: 'hidden',
-    width: '100%',
-    visualViewport: 1,
   }
 
   return (
