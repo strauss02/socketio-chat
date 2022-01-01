@@ -39,7 +39,7 @@ export default function ChatFooter(props) {
         ).getMinutes()}`,
       }
       await socket.emit('send_message', messageData)
-      dispatch(addMessageToChatLog(messageData))
+      // dispatch(addMessageToChatLog(messageData))
       dispatch(changeMessageInput(''))
     }
   }
@@ -50,14 +50,12 @@ export default function ChatFooter(props) {
         <Grid container>
           <Grid item xs={11}>
             <Input
+              disableUnderline={true}
               sx={{
                 width: 1,
                 backgroundColor: 'white',
                 borderRadius: '4em',
                 pl: 2,
-                '&::before': {
-                  border: 'none',
-                },
               }}
               disabled={chatState.currentRoom ? false : true}
               placeholder="Write your message here..."

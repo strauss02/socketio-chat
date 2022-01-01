@@ -18,13 +18,15 @@ function ChatBody() {
   return (
     <ScrollToBottom>
       <Grid sx={{ mt: 10, mb: 12 }} container>
-        {chatState.chatLog.map((messageObj) => {
-          return (
-            <Grid item xs={12}>
-              <ChatBubble messageObj={messageObj} />
-            </Grid>
-          )
-        })}
+        {chatState.chatLogs[chatState.currentRoom]
+          ? chatState.chatLogs[chatState.currentRoom].map((messageObj) => {
+              return (
+                <Grid item xs={12}>
+                  <ChatBubble messageObj={messageObj} />
+                </Grid>
+              )
+            })
+          : ''}
       </Grid>
     </ScrollToBottom>
   )

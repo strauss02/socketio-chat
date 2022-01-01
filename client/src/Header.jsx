@@ -10,7 +10,6 @@ import { useSelector } from 'react-redux'
 import { selectChat } from './features/chat/chatSlice'
 import List from '@mui/material/List'
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft'
-import ChevronRightIcon from '@mui/icons-material/ChevronRight'
 import Drawer from '@mui/material/Drawer'
 import Divider from '@mui/material/Divider'
 
@@ -70,13 +69,52 @@ export default function Header() {
         anchor="left"
         open={open}
       >
-        <IconButton onClick={handleDrawerClose}>
-          <ChevronLeftIcon />
-        </IconButton>
+        <Box
+          sx={{
+            display: 'flex',
+            alignContent: 'center',
+            alignItems: 'center',
+            justifyContent: 'flex-end',
+          }}
+        >
+          <Typography
+            sx={{
+              mr: 'auto',
+              pl: '1rem',
+            }}
+          >
+            Chat Participants
+          </Typography>
+          <IconButton onClick={handleDrawerClose}>
+            <ChevronLeftIcon />
+          </IconButton>
+        </Box>
         <Divider />
-        <List></List>
-        <Divider />
-        <List></List>
+        <List
+          sx={{
+            padding: '1rem',
+            height: '100%',
+          }}
+        >
+          {chatState.roomPopulation[chatState.currentRoom] ? (
+            chatState.roomPopulation[chatState.currentRoom].map((user) => {
+              return <Typography> {user}</Typography>
+            })
+          ) : (
+            <Box
+              sx={{
+                height: '100%',
+                display: 'flex',
+                alignItems: 'center',
+              }}
+            >
+              <Typography color={'GrayText'} variant="subheading">
+                {' '}
+                join a chat to see who's here{' '}
+              </Typography>
+            </Box>
+          )}
+        </List>
       </Drawer>
     </Box>
   )

@@ -26,7 +26,7 @@ function App() {
 
   const joinRoom = () => {
     if (username !== '' && room !== '') {
-      socket.emit('join_room', room)
+      socket.emit('join_room', room, username)
       dispatch(changeCurrentRoom(room))
       dispatch(changeCurrentUsername(username))
       console.log(socket)

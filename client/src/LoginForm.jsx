@@ -18,7 +18,7 @@ function LoginForm(props) {
       <Box sx={{ textAlign: 'left' }}>
         <Typography variant="h4">Hey there! 👋</Typography>
         <Typography variant="body1">{`Welcome to the chat!`}</Typography>
-        <Typography variant="body2">{` Pick a unique username and room to enter`}</Typography>
+        <Typography variant="body2">{` Pick a unique username and a room to enter`}</Typography>
       </Box>
       <TextField
         id="standard-basic"

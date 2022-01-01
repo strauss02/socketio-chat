@@ -18,7 +18,7 @@ export default function SelectRoom(props) {
           value={props.room}
           onChange={handleChange}
         >
-          <MenuItem value={'The watercooler'}>The Watercooler</MenuItem>
+          <MenuItem value={'The Watercooler'}>The Watercooler</MenuItem>
           <MenuItem value={'The Feelings Room'}>The Feelings Room </MenuItem>
           <MenuItem value={'Mid-Life Crisis'}>Mid-Life Crisis</MenuItem>
         </Select>

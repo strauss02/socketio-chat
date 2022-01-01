@@ -4,7 +4,16 @@ const initialState = {
   inputMessage: '',
   currentRoom: '',
   currentUsername: '',
-  chatLog: [],
+  chatLogs: {
+    'The Watercooler': [],
+    'The Feelings Room': [],
+    'Mid-Life Crisis': [],
+  },
+  roomPopulation: {
+    'The Watercooler': [],
+    'The Feelings Room': [],
+    'Mid-Life Crisis': [],
+  },
 }
 
 export const chatSlice = createSlice({
@@ -21,12 +30,16 @@ export const chatSlice = createSlice({
       state.currentUsername = action.payload
     },
     addMessageToChatLog: (state, action) => {
-      state.chatLog.push(action.payload)
+      state.chatLogs[action.payload.room].push(action.payload)
+    },
+    changeRoomPopulation: (state, action) => {
+      state.roomPopulation = action.payload
     },
   },
 })
 
 export const {
+  changeRoomPopulation,
   changeCurrentUsername,
   addMessageToChatLog,
   changeCurrentRoom,

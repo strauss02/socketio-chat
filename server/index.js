@@ -14,21 +14,38 @@ const io = new Server(server, {
   },
 })
 
+const roomPopulation = {
+  'The Watercooler': [],
+  'The Feelings Room': [],
+  'Mid-Life Crisis': [],
+}
+
 io.on('connection', (socket) => {
   console.log('user connected', socket.id)
 
-  socket.on('join_room', (room) => {
-    socket.join(room)
+  socket.on('join_room', async (room, username) => {
+    await socket.join(room)
+    roomPopulation[room].push(username)
     console.log(`user with id ${socket.id} joined the room ${room}`)
+    io.emit('population_changed', roomPopulation)
+    socket.data.username = username
+    socket.data.room = room
   })
 
   socket.on('send_message', (data) => {
     console.log(data)
-    socket.to(data.room).emit('recieve_message', data)
+    io.emit('recieve_message', data)
   })
 
   socket.on('disconnect', () => {
-    console.log('user disconnected', socket.id)
+    console.log('user disconnected', socket.data.username)
+    const { room } = socket.data
+    if (room) {
+      roomPopulation[room] = roomPopulation[room].filter(
+        (user) => user != socket.data.username
+      )
+      io.emit('population_changed', roomPopulation)
+    }
   })
 })
 
