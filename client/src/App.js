@@ -3,6 +3,7 @@ import io from 'socket.io-client'
 import { Grid } from '@mui/material'
 import Header from './Header'
 import ChatFooter from './ChatFooter'
+import { GlobalStyles } from '@mui/material'
 
 import { useSelector, useDispatch } from 'react-redux'
 import chatSlice, {
@@ -43,6 +44,7 @@ function App() {
 
   return (
     <>
+      <GlobalStyles styles={{ fontSize: '62.5%' }} />
       <Header />
       <ChatFooter />
       <Grid container>
@@ -52,7 +54,7 @@ function App() {
             style={{
               display: 'flex',
               alignItems: 'center',
-              height: '100vh',
+              height: 'auto',
               justifyContent: 'center',
             }}
             className="App"

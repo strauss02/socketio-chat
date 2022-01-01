@@ -9,30 +9,30 @@ function ChatBubble({ messageObj }) {
   const chatState = useSelector(selectChat)
 
   const selfSentMessageStyling = {
-    backgroundColor: '#669f7e',
+    backgroundColor: '#e4eaf0',
     height: 'auto',
+    textAlign: 'left',
+    padding: '1rem',
     borderRadius: '0px 5px 5px 5px',
-    '&::before': {
-      content: 'a',
-      color: 'blue',
-      backgroundColor: 'blue',
-    },
   }
   const fellowSentMessageStyling = {
-    backgroundColor: '#12babe',
+    borderRadius: '5px 0px 5px 5px',
+    padding: '1rem',
+    textAlign: 'left',
+    backgroundColor: '#e8f0e4',
     height: 'auto',
   }
 
   const selfSentBoxStyling = {
+    width: ' 100%',
     alignContent: 'flex-start',
-
     display: 'flex',
     flexDirection: 'column',
     flexWrap: 'wrap',
     '& > :not(style)': {
       m: 0,
-      width: 150,
-      maxWidth: 300,
+      width: 'auto',
+      maxWidth: '50vw',
       height: 'auto',
     },
   }
@@ -66,8 +66,10 @@ function ChatBubble({ messageObj }) {
       >
         <Typography variant="body2"> {messageObj.message}</Typography>
       </Paper>
-      <Typography> {messageObj.author}</Typography>
-      <Typography> {messageObj.time}</Typography>
+      <Box sx={{ textAlign: 'left' }}>
+        <Typography variant="caption"> {messageObj.author}</Typography>
+        <Typography variant="caption"> {messageObj.time}</Typography>
+      </Box>
     </Box>
   )
 }

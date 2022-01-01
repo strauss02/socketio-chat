@@ -16,19 +16,22 @@ function ChatBody() {
   const chatState = useSelector(selectChat)
 
   return (
-    <ScrollToBottom>
-      <Grid sx={{ mt: 10, mb: 12 }} container>
-        {chatState.chatLogs[chatState.currentRoom]
-          ? chatState.chatLogs[chatState.currentRoom].map((messageObj) => {
-              return (
-                <Grid item xs={12}>
-                  <ChatBubble messageObj={messageObj} />
-                </Grid>
-              )
-            })
-          : ''}
-      </Grid>
-    </ScrollToBottom>
+    <Grid sx={{ mt: 20, mb: 12, width: '100vw' }} container>
+      {chatState.chatLogs[chatState.currentRoom]
+        ? chatState.chatLogs[chatState.currentRoom].map((messageObj) => {
+            return (
+              <Grid
+                item
+                sx={{ pl: 2, pr: 2, pt: 1 }}
+                className="sababa"
+                xs={12}
+              >
+                <ChatBubble messageObj={messageObj} />
+              </Grid>
+            )
+          })
+        : ''}
+    </Grid>
   )
 }
 
