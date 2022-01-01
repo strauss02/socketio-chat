@@ -64,6 +64,7 @@ function App() {
                 setUsername={setUsername}
                 setRoom={setRoom}
                 joinRoom={joinRoom}
+                room={room}
               />
             )}
           </div>

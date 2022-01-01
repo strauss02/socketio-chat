@@ -6,8 +6,29 @@ import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
 import IconButton from '@mui/material/IconButton'
 import MenuIcon from '@mui/icons-material/Menu'
+import { useSelector } from 'react-redux'
+import { selectChat } from './features/chat/chatSlice'
+import List from '@mui/material/List'
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft'
+import ChevronRightIcon from '@mui/icons-material/ChevronRight'
+import Drawer from '@mui/material/Drawer'
+import Divider from '@mui/material/Divider'
 
 export default function Header() {
+  const chatState = useSelector(selectChat)
+
+  const [open, setOpen] = React.useState(false)
+
+  const handleDrawerOpen = () => {
+    setOpen(true)
+  }
+
+  const handleDrawerClose = () => {
+    setOpen(false)
+  }
+
+  const drawerWidth = 240
+
   return (
     <Box
       sx={{
@@ -27,15 +48,36 @@ export default function Header() {
             color="inherit"
             aria-label="menu"
             sx={{ mr: 2 }}
+            onClick={handleDrawerOpen}
           >
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            News
+            {chatState.currentRoom}
           </Typography>
-          <Button color="inherit">Login</Button>
         </Toolbar>
       </AppBar>
+      <Drawer
+        sx={{
+          width: drawerWidth,
+          flexShrink: 0,
+          '& .MuiDrawer-paper': {
+            width: drawerWidth,
+            boxSizing: 'border-box',
+          },
+        }}
+        variant="persistent"
+        anchor="left"
+        open={open}
+      >
+        <IconButton onClick={handleDrawerClose}>
+          <ChevronLeftIcon />
+        </IconButton>
+        <Divider />
+        <List></List>
+        <Divider />
+        <List></List>
+      </Drawer>
     </Box>
   )
 }
