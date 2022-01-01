@@ -16,7 +16,7 @@ function ChatBody() {
   const chatState = useSelector(selectChat)
 
   return (
-    <Grid sx={{ mt: 20, mb: 12, width: '100vw' }} container>
+    <Grid sx={{ mt: 12, mb: 12, width: '100vw' }} container>
       {chatState.chatLogs[chatState.currentRoom]
         ? chatState.chatLogs[chatState.currentRoom].map((messageObj) => {
             return (

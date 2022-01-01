@@ -14,7 +14,15 @@ import SelectRoom from './SelectRoom'
 
 function LoginForm(props) {
   return (
-    <Paper sx={{ display: 'flex', flexDirection: 'column', p: '1rem 3rem' }}>
+    <Paper
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        p: '1rem 3rem',
+        mt: 20,
+        mb: 20,
+      }}
+    >
       <Box sx={{ textAlign: 'left' }}>
         <Typography variant="h4">Hey there! 👋</Typography>
         <Typography variant="body1">{`Welcome to the chat!`}</Typography>
