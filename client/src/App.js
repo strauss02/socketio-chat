@@ -15,7 +15,7 @@ import './App.css'
 import Chat from './Chat'
 import LoginForm from './LoginForm'
 
-const socket = io.connect('http://localhost:3001')
+const socket = io.connect()
 
 function App() {
   const dispatch = useDispatch()
